@@ -21,12 +21,14 @@ public class FragmentOne extends Fragment implements SimpleAdapter.OnItemClickLi
 
     private RecyclerView rv;
     private SimpleAdapter adapter;
+    private boolean isTablet;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_one, container, false);
 
+        isTablet = getActivity().getResources().getBoolean(R.bool.isTablet);
         rv = (RecyclerView) rootview.findViewById(R.id.rv);
         setupRV();
         return rootview;
@@ -51,10 +53,15 @@ public class FragmentOne extends Fragment implements SimpleAdapter.OnItemClickLi
 
     @Override
     public void onItemClick(String text) {
-        //Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
-        getFragmentManager().beginTransaction()
-                .replace(R.id.mycontainer, FragmentTwo.newInstance(text))
-                .addToBackStack(null)
-                .commit();
+        if(isTablet){
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container_right, FragmentTwo.newInstance(text))
+                    .commit();
+        }else{
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.mycontainer, FragmentTwo.newInstance(text))
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }

@@ -30,7 +30,7 @@ public class FragmentTwo extends Fragment {
         View v = inflater.inflate(R.layout.fragment_two, container, false);
 
         ((TextView) v.findViewById(R.id.tv_detail))
-                .setText(getArguments().getString("text"));
+                .setText(getArguments().getString("text", "select first"));
 
         return v;
     }

@@ -10,9 +10,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.mycontainer, new FragmentOne())
-                .commit();
+        boolean isTablet = getApplicationContext().getResources().getBoolean(R.bool.isTablet);
+
+        if(!isTablet){
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.mycontainer, new FragmentOne())
+                    .commit();
+        }
+
     }
 
     @Override
