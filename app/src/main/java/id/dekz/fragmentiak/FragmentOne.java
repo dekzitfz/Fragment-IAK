@@ -51,6 +51,10 @@ public class FragmentOne extends Fragment implements SimpleAdapter.OnItemClickLi
 
     @Override
     public void onItemClick(String text) {
-        Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.mycontainer, FragmentTwo.newInstance(text))
+                .addToBackStack(null)
+                .commit();
     }
 }
