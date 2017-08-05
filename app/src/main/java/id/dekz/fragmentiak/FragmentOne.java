@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by DEKZ on 8/5/2017.
  */
 
-public class FragmentOne extends Fragment {
+public class FragmentOne extends Fragment implements SimpleAdapter.OnItemClickListener {
 
     private RecyclerView rv;
     private SimpleAdapter adapter;
@@ -36,6 +37,7 @@ public class FragmentOne extends Fragment {
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv.setAdapter(adapter);
         adapter.setData(getData());
+        adapter.setClickListener(this);
     }
 
     private List<String> getData(){
@@ -45,5 +47,10 @@ public class FragmentOne extends Fragment {
         result.add("Lolipop");
 
         return result;
+    }
+
+    @Override
+    public void onItemClick(String text) {
+        Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
     }
 }

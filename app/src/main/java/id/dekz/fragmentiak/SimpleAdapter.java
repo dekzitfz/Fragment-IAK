@@ -16,8 +16,17 @@ import java.util.List;
 public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.SimpleViewholder> {
 
     private List<String> data = new ArrayList<>();
+    OnItemClickListener clickListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(String text);
+    }
 
     public SimpleAdapter() {}
+
+    public void setClickListener(OnItemClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
 
     public void setData(List<String> data) {
         this.data = data;
@@ -34,7 +43,14 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.SimpleView
 
     @Override
     public void onBindViewHolder(SimpleViewholder holder, int position) {
-        holder.text.setText(data.get(position));
+        final String txt = data.get(position);
+        holder.text.setText(txt);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onItemClick(txt);
+            }
+        });
     }
 
     @Override
